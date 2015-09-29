@@ -2,6 +2,16 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-a {
-  color: #00b7ff;
+table {
+  border: 1px #d2d9ee solid;
+  border-collapse: collapse;
+}
+td {
+  text-align: center;
+  border: #d2d9ee 1px solid;
+  width: 60px;
+  height: 60px;
+}
+.active {
+  background: #4196d0;
 }

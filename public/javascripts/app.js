@@ -20,8 +20,8 @@ $(document).ready(function () {
   }
 
   if($('.board').size() > 0 ) {
-    $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
-    $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[1]+']').css('text-decoration', 'underline'); 
+    $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').addClass('active');
+    $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[1]+']').addClass('active'); 
     _.each(start.position.rows, function (row) {
       _.each(start.position.columns, function (column) {
         $('tr').find('td[data-row='+row+'][data-column='+column+']').css('color', 'green');
