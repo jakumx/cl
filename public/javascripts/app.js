@@ -40,6 +40,22 @@ $(document).ready(function () {
     movement(move);
   });
 
+  function removePositionClass() {
+    _.each(piece.position.rows, function (row) {
+      _.each(piece.position.columns, function (column) {
+          $('tr').find('td[data-row='+row+'][data-column='+column+']').removeClass('active');
+      });
+    }); 
+  }
+
+  function addPositionClass () {
+    _.each(piece.position.rows, function (row) {
+      _.each(piece.position.columns, function (column) {
+          $('tr').find('td[data-row='+row+'][data-column='+column+']').addClass('active');
+      });
+    }); 
+  }
+
   var movement = function (move) {
     switch(move) {
       case 'up':
@@ -65,34 +81,28 @@ $(document).ready(function () {
       if (rowSize == 1 && colSize == 2) {
         var actualRow = piece.position.rows[0];
         if (ud == 'u' && actualRow + 1 < 9) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[1]+']').css('text-decoration', 'none');
+          removePositionClass();
           piece.position.rows = [actualRow + 1];
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[1]+']').css('text-decoration', 'underline');
+          addPositionClass();
         }
         if (ud == 'd' && actualRow - 1 > 0 ) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[1]+']').css('text-decoration', 'none');
+          removePositionClass();
           piece.position.rows = [actualRow - 1];
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[1]+']').css('text-decoration', 'underline');
+          addPositionClass();
         }
       }
 
       if (rowSize == 1 && colSize == 1) {
         var actualRow = piece.position.rows[0];
         if (ud == 'u' && actualRow + 2 < 9) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
+          removePositionClass();
           piece.position.rows = [actualRow + 1, actualRow + 2];
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
-          $('tr').find('td[data-row='+piece.position.rows[1]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
+          addPositionClass();
         }
         if (ud == 'd' && actualRow - 2 > 0) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
+          removePositionClass();
           piece.position.rows = [actualRow - 1, actualRow - 2];
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
-          $('tr').find('td[data-row='+piece.position.rows[1]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
+          addPositionClass();
         }
       }
 
@@ -100,16 +110,14 @@ $(document).ready(function () {
         var maxRow = _.max(piece.position.rows);
         var minRow = _.min(piece.position.rows);
         if (ud == 'u' && maxRow + 1 < 9) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
-          $('tr').find('td[data-row='+piece.position.rows[1]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
+          removePositionClass();
           piece.position.rows = [maxRow + 1];
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
+          addPositionClass();
         }
         if (ud == 'd' && minRow - 1 > 0) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
-          $('tr').find('td[data-row='+piece.position.rows[1]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
+          removePositionClass();
           piece.position.rows = [minRow - 1];
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
+          addPositionClass();
         }
       }
     }
@@ -120,52 +128,42 @@ $(document).ready(function () {
         var maxCol = _.max(piece.position.columns),
           minCol = _.min(piece.position.columns);
         if (lr == 'l' && maxCol + 1 < 7 ) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[1]+']').css('text-decoration', 'none'); 
+          removePositionClass();
           piece.position.columns = [maxCol + 1];
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
+          addPositionClass();
         }
         if (lr == 'r' && minCol - 1 > 0) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[1]+']').css('text-decoration', 'none'); 
+          removePositionClass();
           piece.position.columns = [minCol - 1];
-
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
+          addPositionClass();
         }
       }
 
       if (rowSize == 1 && colSize == 1) {
         var actualCol = piece.position.columns[0];
         if (lr == 'l' && actualCol + 2 < 7) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
+          removePositionClass();
           piece.position.columns = [actualCol + 2, actualCol + 1];
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[1]+']').css('text-decoration', 'underline'); 
+          addPositionClass();
         }
         if (lr == 'r' && actualCol - 2 > 0) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
+          removePositionClass();
           piece.position.columns = [actualCol - 1, actualCol - 2];
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[1]+']').css('text-decoration', 'underline'); 
+          addPositionClass();
         }
       }
 
       if (rowSize == 2 && colSize == 1) {
         var actualCol = piece.position.columns[0];
         if (lr == 'l' && actualCol + 1 < 7) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
-          $('tr').find('td[data-row='+piece.position.rows[1]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
+          removePositionClass();
           piece.position.columns = [actualCol + 1];
-
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
-          $('tr').find('td[data-row='+piece.position.rows[1]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline'); 
+          addPositionClass();
         }
         if (lr == 'r' && actualCol - 1 > 0) {
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
-          $('tr').find('td[data-row='+piece.position.rows[1]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'none');
+          removePositionClass();
           piece.position.columns = [actualCol - 1];
-          $('tr').find('td[data-row='+piece.position.rows[0]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline');
-          $('tr').find('td[data-row='+piece.position.rows[1]+'][data-column='+piece.position.columns[0]+']').css('text-decoration', 'underline'); 
+          addPositionClass();
         }
       }
     }
